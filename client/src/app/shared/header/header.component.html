@@ -1,0 +1,49 @@
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" (click)="onMenuClick()" routerLink="">Finance</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" *showAuthed="false">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+                <a class="nav-link" (click)="onMenuClick('Home')" routerLink="">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="onMenuClick('aboutus')" routerLink="/aboutus">About Us</a>
+            </li>
+        </ul>
+        <ul class="form-inline my-2 my-lg-0">
+            <div>
+                <a class="nav-link" (click)="onMenuClick('register')" routerLink="/signup">Register</a>
+            </div>
+            <div>
+                <a class="nav-link" (click)="onMenuClick('signin')" routerLink="/login">Sign in</a>
+            </div>
+        </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent1" *showAuthed="true">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" *ngIf="currentUser.userType==='A'">
+                <a class="nav-link" routerLink="/admin">Admin</a>
+            </li>
+            <li class="nav-item" *ngIf="currentUser.userType==='U'">
+                <a class="nav-link" routerLink="/users">User</a>
+            </li>
+
+        </ul>
+        <ul class="nav navbar-nav" style="padding-right: 50px">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span> {{ currentUser.firstName +" "+ currentUser.lastName }}</span>
+                </a>
+                <div class="dropdown-menu">
+                    <div *ngIf="currentUser.userType==='U'">
+                        <a class="nav-link" routerLink="/profile">My Profile</a>
+                    </div>
+                    <a class="nav-link" (click)="onMenuClick('signout')" routerLink="/login">Sign out</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>

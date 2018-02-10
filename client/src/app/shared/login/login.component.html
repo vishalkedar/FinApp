@@ -1,0 +1,22 @@
+<div id="dic_bubble" class="selection_bubble fontSize13 noSelect" style="z-index: 9999; border: 1px solid rgb(74, 174, 222); visibility: hidden;">
+</div>
+<div class="container">
+ <!-- <p-growl [(value)]="msgs"></p-growl> -->
+ <p-messages [(value)]="msgs"></p-messages>
+  <form class="form-signin" [formGroup]="authForm" (ngSubmit)="submitForm()">
+   
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <label for="inputEmail" class="sr-only">Username</label>
+    <input id="inputEmail" class="form-control" formControlName="email" placeholder="Email address" required autofocus="" type="email">
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input id="inputPassword" class="form-control" formControlName="password" placeholder="Password" required="" type="password">
+    <div class="checkbox">
+      <label>
+        <input value="remember-me" type="checkbox"> Remember me
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  </form>
+
+</div>
