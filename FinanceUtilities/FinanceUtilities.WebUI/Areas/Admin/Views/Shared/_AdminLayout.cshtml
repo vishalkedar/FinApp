@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <h1>Hello</h1>
+        @if (Request.IsAuthenticated)
+        {
+
+            using (Html.BeginForm("LogOff", "../Home", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                @Html.ActionLink("User", "Users", "Admin")
+            
+                <input type="submit" value="Log off" class="btn btn-default btn-sm" />
+            }
+        }
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

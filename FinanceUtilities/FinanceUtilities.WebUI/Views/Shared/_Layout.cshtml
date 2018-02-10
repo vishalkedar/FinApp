@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="panel-title">
+        <header class="modal-header" style="background-color:skyblue">
+            <div class="col-lg-5" style="padding-left:120px">Finance Utilitities</div>
+            <div class="col-2">
+                @if (ViewContext.RouteData.Values["Action"].ToString().ToLowerInvariant() == "index" ||
+            ViewContext.RouteData.Values["Action"].ToString().ToLowerInvariant() == "registeruser")
+                {
+                    @*<input type="text" name="username" class="input-sm "  value="" placeholder="User Name" />
+                    <input type="password" class="input-sm" name="password" value="" placeholder="Password" />
+                    <input type="submit" name="Sign in" class="btn btn-default btn-sm " value="Sign in" />
+                    @Html.ActionLink("Forgot Password?", "ResetPassword")*@
+
+                    Html.RenderPartial("_LoginPartial");
+
+                }
+                else if (ViewContext.RouteData.Values["Action"].ToString().ToLowerInvariant() == "resetpassword")
+                {
+                    <div style="padding-left:160px">
+                        @Html.ActionLink("Sign in", "Index")
+                    </div>
+                }
+            </div>
+        </header>
+        <section class="container">
+            @RenderBody()
+        </section>
+        <footer class="panel-footer">Footer</footer>
+    </div>
+
+</body>
+</html>

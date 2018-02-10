@@ -1,0 +1,40 @@
+﻿
+<script src="~/Scripts/jquery-3.0.0.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@using (Ajax.BeginForm("Login", "Home", new AjaxOptions
+{
+    OnBegin = "Onbegin",
+    OnSuccess = "OnSuccessLogin",
+    OnFailure = "OnFailureLogin",
+    HttpMethod = "POST"
+}))
+
+
+{
+    @Html.AntiForgeryToken()
+    <input type="text" name="username" class="input-sm " id="username" value="" placeholder="User Name" />
+    <input type="password" class="input-sm" name="password" id="password" value="" placeholder="Password" />
+    <input type="submit" value="Log in" class="btn btn-default btn-sm" />
+
+
+    @Html.ActionLink("Forgot Password?", "ResetPassword", "Home")
+}
+<script type="text/javascript" language="javascript">
+    function Onbegin(data) {
+        var asd = data;
+        if ($("#username").val().trim() == '' || $("#password").val().trim() == '') {
+            if ($("#username").val() == '')
+                alert('Please enter username.');
+            else if ($("#password").val() == '')
+                alert('Please enter password.');
+            return false;
+        }
+    }
+
+    function OnSuccessLogin(result) {
+        window.location.href = result.url;
+    }
+    function OnFailureLogin(){ }
+</script>

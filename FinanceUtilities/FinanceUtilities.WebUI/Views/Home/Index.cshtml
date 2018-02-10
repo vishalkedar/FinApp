@@ -1,0 +1,119 @@
+﻿@model FinanceUtilities.WebUI.Models.UserModel
+@using System.Web.Optimization
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.0.0.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript" language="javascript">
+    function Showmessage(data) {
+        $("#successModal").modal({ backdrop: "static" })
+    }
+    function OnFailure(data) {
+        $("#failModal").modal({ backdrop: "static" })
+    }
+
+    function resetFields() {
+        $("#successModal").modal("hide");
+        $(':input').each(function () {
+            var type = this.type;
+            var tag = this.tagName.toLowerCase(); // normalize case
+            // to reset the value attr of text inputs,
+            // password inputs, fileUpload and textareas
+            if (type == 'text' || type == 'password' || tag == 'textarea' || type == 'file')
+                this.value = "";
+                // checkboxes and radios need to have their checked state cleared
+            else if (type == 'checkbox' || type == 'radio')
+                this.checked = false;
+                // select elements need to have their 'selectedIndex' property set to -1
+                // (this works for both single and multiple select elements)
+            else if (tag == 'select')
+                this.selectedIndex = 0;
+        });
+    }
+
+    function CloseErrorPopup() {
+        $("#failModal").modal("hide");
+    }
+</script>
+
+<div class="modal-dialog" style="width:400px;background-color:lightslategray; padding:6px">
+    <h4 class="center-block text-center">Welcome to Finance Utilities site!  Please Register <br /> Get started - it's absolutely free! </h4>
+    @using (Ajax.BeginForm("RegisterUser", "home", FormMethod.Post, new AjaxOptions
+    {
+        OnSuccess = "Showmessage",
+        OnFailure = "OnFailure",
+        HttpMethod = "POST"
+    }))
+    {
+        <form role="form" method="get">
+            <!-- Modal -->
+            <div class="modal fade" id="successModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" onclick="resetFields();">&times;</button>
+                            <h4 class="modal-title">User registered successfully.</h4>
+                        </div>
+                        @* <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Modal Header</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Done.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="failModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" onclick="CloseErrorPopup();">&times;</button>
+                            <h4 class="modal-title">User is not registered due to some technical problem. Please contact to Administrator.</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="firstName">First Name *</label>
+                @Html.TextBoxFor(m => m.firstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.firstName)
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                @Html.TextBoxFor(m => m.lastName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.lastName)
+            </div>
+            <div class="form-group">
+                <label for="email">Email address </label>
+                @Html.TextBoxFor(m => m.email, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile</label>
+                @Html.TextBoxFor(m => m.mobile, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.mobile)
+            </div>
+            <div class="form-group">
+                <label for="userName">User Name *</label>
+                @Html.TextBoxFor(m => m.userName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.userName)
+            </div>
+            <div class="form-group">
+                <label for="password">Password *</label>
+                @Html.PasswordFor(m => m.password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.password)
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    }
+</div>
